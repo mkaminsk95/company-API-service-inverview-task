@@ -10,13 +10,18 @@ use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
+    /**
+     * @return Collection<int, Company>
+     */
     public function index(): Collection
     {
-        return Company::get();
+        return Company::all();
     }
 
     public function store(Request $request): JsonResponse
     {
+        // TODO: Move validations to separate classes
+        // TODO: Add validation for nip formating
         $data = $request->validate([
             'name' => 'required|string',
             'nip' => 'required|string|size:10|unique:companies',
@@ -30,22 +35,34 @@ class CompanyController extends Controller
         return response()->json($company, 201);
     }
 
-    public function show($id): Company
-    {
-        return Company::findOrFail($id);
-    }
-
-    public function update(Request $request, $id): JsonResponse
+    public function show(int $id): JsonResponse
     {
         $company = Company::findOrFail($id);
-        $company->update($request->all());
+        return response()->json($company);
+    }
+
+    public function update(Request $request, int $id): JsonResponse
+    {
+        $company = Company::findOrFail($id);
+
+        // TODO: Add validation for nip formating
+        $data = $request->validate([
+            'name' => 'sometimes|required|string',
+            'nip' => 'sometimes|required|string|size:10|unique:companies,nip,' . $id,
+            'address' => 'sometimes|required|string',
+            'city' => 'sometimes|required|string',
+            'postal_code' => 'sometimes|required|string|regex:/^\d{2}-\d{3}$/',
+        ]);
+
+        $company->update($data);
 
         return response()->json($company);
     }
 
-    public function destroy($id): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
-        Company::findOrFail($id)->delete();
+        $company = Company::findOrFail($id);
+        $company->delete();
 
         return response()->json(null, 204);
     }
