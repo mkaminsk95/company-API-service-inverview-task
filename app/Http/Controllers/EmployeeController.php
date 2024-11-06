@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEmployeeRequest;
+use App\Http\Requests\UpdateEmployeeRequest;
 use App\Models\Employee;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
@@ -28,7 +28,7 @@ class EmployeeController extends Controller
         return response()->json($employee);
     }
 
-    public function update(Request $request, string $id): JsonResponse
+    public function update(UpdateEmployeeRequest $request, string $id): JsonResponse
     {
         $employee = Employee::findOrFail($id);
         $data = $request->validated();
