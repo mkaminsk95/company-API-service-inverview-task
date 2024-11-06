@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Models\Employee;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -24,11 +23,8 @@ class EmployeeController extends Controller
 
     public function show(int $id): JsonResponse
     {
-        $employee = Employee::find($id);
+        $employee = Employee::findOrFail($id);
 
-        if (!$employee) {
-            return response()->json(['error' => 'Employee not found'], 404);
-        }
         return response()->json($employee);
     }
 
