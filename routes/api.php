@@ -5,6 +5,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::apiResource('companies', CompanyController::class);
 
-Route::fallback(function (){
+Route::fallback(function () {
     abort(404, 'API resource not found');
 });

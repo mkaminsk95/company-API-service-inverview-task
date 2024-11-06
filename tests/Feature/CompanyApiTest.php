@@ -25,7 +25,7 @@ class CompanyApiTest extends TestCase
                     'postal_code',
                     'created_at',
                     'updated_at',
-                ]
+                ],
             ]);
     }
 
@@ -186,7 +186,7 @@ class CompanyApiTest extends TestCase
 
     public function test_delete_company_not_found()
     {
-        $response = $this->deleteJson("/api/companies/1");
+        $response = $this->deleteJson('/api/companies/1');
 
         $response->assertStatus(404);
     }

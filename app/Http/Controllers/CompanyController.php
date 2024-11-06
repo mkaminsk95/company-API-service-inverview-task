@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers;
@@ -29,6 +30,7 @@ class CompanyController extends Controller
     public function show(int $id): JsonResponse
     {
         $company = Company::findOrFail($id);
+
         return response()->json($company);
     }
 
