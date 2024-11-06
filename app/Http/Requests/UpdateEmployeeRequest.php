@@ -14,10 +14,10 @@ class UpdateEmployeeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => 'sometimes|required|string',
-            'second_name' => 'sometimes|required|string',
-            'email' => 'sometimes|required|string|email|unique:employees,email,'.$this->employee->email,
-            'phone' => 'sometimes|required|string|digits|unique:employees'.$this->employee->phone,
+            'first_name' => 'sometimes|required|string:255',
+            'second_name' => 'sometimes|required|string:255',
+            'email' => 'sometimes|required|string:255|email|unique:employees,email,'.$this->employee->email,
+            'phone' => 'sometimes|required|string|digits:15|unique:employees'.$this->employee->phone,
             'company_id' => 'sometimes|required|exists:companies,id',
         ];
     }

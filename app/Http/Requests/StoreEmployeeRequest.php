@@ -14,10 +14,10 @@ class StoreEmployeeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => 'required|string',
-            'second_name' => 'required|string',
-            'email' => 'required|string|email|unique:employees',
-            'phone' => 'sometimes|required|string|digits|unique:employees',
+            'first_name' => 'required|string:255',
+            'second_name' => 'required|string:255',
+            'email' => 'required|string:255|email|unique:employees',
+            'phone' => 'sometimes|required|string|digits:15|unique:employees',
             'company_id' => 'required|exists:companies,id',
         ];
     }
