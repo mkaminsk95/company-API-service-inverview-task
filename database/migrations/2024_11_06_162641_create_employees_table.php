@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('second_name');
             $table->string('email')->unique();
-            $table->string('phone')->nullable();
+            $table->string('phone')->unique()->nullable();
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
         });
     }
