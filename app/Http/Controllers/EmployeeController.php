@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEmployeeRequest;
@@ -11,21 +13,21 @@ class EmployeeController extends Controller
 {
     public function index(): JsonResponse
     {
-        return response()->json(Employee::all());
+        return response()->json(Employee::all(), JsonResponse::HTTP_OK);
     }
 
     public function store(StoreEmployeeRequest $request): JsonResponse
     {
         $employee = Employee::create($request->validated());
 
-        return response()->json($employee, 201);
+        return response()->json($employee, JsonResponse::HTTP_CREATED);
     }
 
     public function show(int $id): JsonResponse
     {
         $employee = Employee::findOrFail($id);
 
-        return response()->json($employee);
+        return response()->json($employee, JsonResponse::HTTP_OK);
     }
 
     public function update(UpdateEmployeeRequest $request, string $id): JsonResponse
@@ -35,7 +37,7 @@ class EmployeeController extends Controller
 
         $employee->update($data);
 
-        return response()->json($employee);
+        return response()->json($employee, JsonResponse::HTTP_OK);
     }
 
     public function destroy(int $id): JsonResponse
@@ -43,6 +45,6 @@ class EmployeeController extends Controller
         $employee = Employee::findOrFail($id);
         $employee->delete();
 
-        return response()->json(null, 204);
+        return response()->json(null, JsonResponse::HTTP_NO_CONTENT);
     }
 }
