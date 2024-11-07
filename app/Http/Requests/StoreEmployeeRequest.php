@@ -19,7 +19,7 @@ class StoreEmployeeRequest extends FormRequest
             'first_name' => 'required|string|max:255',
             'second_name' => 'required|string|max:255',
             'email' => 'required|string|max:255|email|unique:employees',
-            'phone' => ['sometimes', 'required', 'string', 'regex:' . self::PHONE_REGEX, 'unique:employees'],
+            'phone' => ['sometimes', 'required', 'string', 'regex:'.self::PHONE_REGEX, 'unique:employees'],
             'company_id' => 'required|exists:companies,id',
         ];
     }

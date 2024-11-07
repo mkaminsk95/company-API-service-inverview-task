@@ -19,7 +19,7 @@ class UpdateEmployeeRequest extends FormRequest
             'first_name' => 'sometimes|required|string|max:255',
             'second_name' => 'sometimes|required|string|max:255',
             'email' => 'sometimes|required|string|max:255|email|unique:employees,email,'.$this->employee,
-            'phone' => ['sometimes', 'required', 'string', 'regex:' . self::PHONE_REGEX, 'unique:employees,phone,'.$this->employee],
+            'phone' => ['sometimes', 'required', 'string', 'regex:'.self::PHONE_REGEX, 'unique:employees,phone,'.$this->employee],
             'company_id' => 'sometimes|required|exists:companies,id',
         ];
     }
