@@ -11,7 +11,7 @@ class StoreEmployeeRequest extends FormRequest
     const PHONE_REGEX = "/^([0|\+[0-9]{1,5})?([0-9]{9})$/";
 
     /**
-     * @return string[]
+     * @return array<string, array<int, string>|string>
      */
     public function rules(): array
     {
