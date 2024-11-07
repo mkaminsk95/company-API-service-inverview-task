@@ -15,7 +15,7 @@ class EmployeeFactory extends Factory
             'first_name' => $this->faker->firstName(),
             'second_name' => $this->faker->lastName(),
             'email' => $this->faker->email(),
-            'phone' => $this->faker->phoneNumber(),
+            'phone' => $this->faker->e164PhoneNumber(),
             'company_id' => Company::all()->random()->id,
         ];
     }
